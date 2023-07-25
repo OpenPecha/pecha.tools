@@ -1,22 +1,29 @@
-import { Link } from "@remix-run/react";
-import { toolList } from "~/constant";
+import { Link, useLoaderData } from "@remix-run/react";
 
 function Main() {
+  const { status, user } = useLoaderData();
   return (
     <main>
       <h1>Tools</h1>
       <section>
         <div className="tool-list">
-          {toolList.map((list) => {
-            return (
-              <Link key={list.name} to={"/" + list.name} className="tool-item">
-                {list.name}
-              </Link>
-            );
-          })}
+          {user &&
+            status.map((list) => {
+              return <Tool list={list} />;
+            })}
         </div>
       </section>
     </main>
+  );
+}
+
+function Tool({ list }) {
+  return (
+    <div className="tool-item">
+      <Link to={list.name}>
+        <div className="tool-name">{list.name}</div>
+      </Link>
+    </div>
   );
 }
 

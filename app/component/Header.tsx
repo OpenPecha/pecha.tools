@@ -1,8 +1,10 @@
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import React from "react";
 import Login from "./Login";
 
-function Header({ user }) {
+function Header() {
+  const { user } = useLoaderData();
+
   return (
     <header className="header">
       <h1 className="title">Pecha Tools</h1>
