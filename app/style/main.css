@@ -1,0 +1,37 @@
+main {
+  padding: 20px;
+}
+main > h1 {
+  padding-bottom: 20px;
+}
+.tool-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tool-item {
+  border-radius: 10px;
+  font-size: 30px;
+  width: fit-content;
+  padding: 10px;
+  background-color: #eee;
+}
+.tool-item:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+iframe {
+  height: 100vh;
+  width: 100vw;
+}
+a {
+  text-decoration: none;
+}
+.login-btn {
+  background-color: transparent;
+  border: 1px solid white;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+}
