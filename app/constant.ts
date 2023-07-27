@@ -5,7 +5,7 @@ export let toolList = [
   },
   {
     name: "sentence segmentation",
-    url: "https://sentense-segmentation.onrender.com",
+    url: "https://sentence-segmentation.onrender.com",
   },
   {
     name: "glyph annotation",

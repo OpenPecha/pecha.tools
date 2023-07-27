@@ -9,7 +9,7 @@ function Main() {
         <div className="tool-list">
           {user &&
             status.map((list) => {
-              return <Tool list={list} />;
+              return <Tool list={list} key={list.name} />;
             })}
         </div>
       </section>

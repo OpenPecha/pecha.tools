@@ -10,7 +10,7 @@ function History() {
     >
       <h1>History</h1>
       {status.map((list) => {
-        return <EachHistory list={list} />;
+        return <EachHistory list={list} key={list?.data?.text?.length} />;
       })}
     </div>
   );
