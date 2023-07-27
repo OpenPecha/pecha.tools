@@ -4,7 +4,7 @@ export let toolList = [
     url: "https://word-segmentation.onrender.com",
   },
   {
-    name: "sentense segmentation",
+    name: "sentence segmentation",
     url: "https://sentense-segmentation.onrender.com",
   },
   {
