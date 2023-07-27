@@ -9,8 +9,8 @@ function History() {
       style={{ flex: 1, maxWidth: 340, border: "1px solid black", margin: 20 }}
     >
       <h1>History</h1>
-      {status.map((list) => {
-        return <EachHistory list={list} key={list?.data?.text?.length} />;
+      {status.map((list, index) => {
+        return <EachHistory list={list} key={"history_" + index} />;
       })}
     </div>
   );

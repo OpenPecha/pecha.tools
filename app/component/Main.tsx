@@ -20,7 +20,7 @@ function Main() {
 function Tool({ list }) {
   return (
     <div className="tool-item">
-      <Link to={list.name}>
+      <Link to={"/tool/" + list.name}>
         <div className="tool-name">{list.name}</div>
       </Link>
     </div>
