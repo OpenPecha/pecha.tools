@@ -15,6 +15,24 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export function ErrorBoundary({ error }) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        visit work.pecha.tools for old version,if error persist please contact
+        {error}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 export default function App() {
   return (
     <html lang="en">

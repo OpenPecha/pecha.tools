@@ -9,6 +9,6 @@ export let toolList = [
   },
   {
     name: "glyph annotation",
-    url: "https://pecha.tools/glyph_annotation/",
+    url: "https://work.pecha.tools/glyph_annotation/",
   },
 ];

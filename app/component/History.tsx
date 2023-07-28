@@ -10,6 +10,7 @@ function History() {
     >
       <h1>History</h1>
       {status.map((list, index) => {
+        if (!list.data) return null;
         return <EachHistory list={list} key={"history_" + index} />;
       })}
     </div>
