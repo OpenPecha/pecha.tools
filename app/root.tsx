@@ -13,10 +13,6 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: globalStyle,
   },
-  {
-    rel: "icon",
-    href: "/favicon.png",
-  },
 ];
 
 export default function App() {
