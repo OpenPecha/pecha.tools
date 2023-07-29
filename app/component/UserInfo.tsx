@@ -9,7 +9,7 @@ function UserInfo() {
         login to use tools
       </div>
     );
-  return <div style={{ padding: 20 }}>Welcome, {user?.username} !</div>;
+  return <div className="h1">Welcome, {user?.username}</div>;
 }
 
 export default UserInfo;

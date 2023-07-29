@@ -1,5 +1,7 @@
 @import "main.css";
-
+:root {
+  --card-hover: #fe5;
+}
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +14,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
 }
 .user-picture {
   width: 25px;
@@ -56,4 +62,19 @@
   padding: 8px 16px;
   cursor: pointer;
   border: 1px solid white;
+}
+.h1 {
+  font-size: clamp(38px, 5vw, 54px);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 11px;
+  letter-spacing: -2px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
 }

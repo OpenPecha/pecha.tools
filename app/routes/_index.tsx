@@ -36,7 +36,7 @@ export default function Index() {
     <div>
       <Header />
       <UserInfo />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div className="container">
         <Main />
         <History />
       </div>

@@ -1,10 +1,10 @@
 export let toolList = [
   {
-    name: "word segmentation",
+    name: "segment word",
     url: "https://word.pecha.tools",
   },
   {
-    name: "sentence segmentation",
+    name: "segment sentence",
     url: "https://sentence.pecha.tools",
   },
   {
