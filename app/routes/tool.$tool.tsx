@@ -1,6 +1,6 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toolList } from "~/constant";
 import { authenticator } from "~/services/auth.server";
 import { getUserSession } from "~/services/session.server";
@@ -21,15 +21,18 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 function Tool() {
   const { url } = useLoaderData();
   const [loaded, setLoaded] = useState(false);
+  const iframeRef = useRef(null);
   function onLoadFunction() {
+    const iframe = iframeRef.current;
+    if (iframe) {
+    }
     setLoaded(true);
     console.log("loaded");
   }
-
   return (
     <div style={{ maxWidth: "100vw", maxHeight: "100vh", overflow: "hidden" }}>
       {!loaded && <Loading />}
-      <iframe src={url} onLoad={onLoadFunction}></iframe>
+      <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
     </div>
   );
 }

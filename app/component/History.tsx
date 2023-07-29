@@ -1,8 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
-import React from "react";
 
 function History() {
-  const { status } = useLoaderData();
+  const { user, status } = useLoaderData();
 
   return (
     <div

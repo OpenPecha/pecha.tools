@@ -11,14 +11,13 @@ import { getUserSession } from "~/services/session.server";
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
 
-  if (!user) return { user };
+  if (!user) return { user, status: toolList };
   let data = toolList.map(async (list) => {
     let data = await fetch(list.url + "/api/user/" + user.username);
     let res = await data.json();
     return { name: list.name, data: res.users || null, url: list.url };
   });
   let status = await Promise.all(data);
-  console.log(status);
   return { user, status };
 };
 
@@ -33,32 +32,6 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const { user } = useLoaderData();
-  if (!user)
-    return (
-      <Form
-        action="/auth/auth0"
-        method="post"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <button
-          style={{
-            padding: 10,
-            border: "1px solid black",
-            background: "transparent",
-            cursor: "pointer ",
-            transition: "0.3s all ease",
-          }}
-        >
-          Login
-        </button>
-      </Form>
-    );
   return (
     <div>
       <Header />

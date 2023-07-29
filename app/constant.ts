@@ -1,11 +1,11 @@
 export let toolList = [
   {
     name: "word segmentation",
-    url: "https://word-segmentation.onrender.com",
+    url: "https://word.pecha.tools",
   },
   {
     name: "sentence segmentation",
-    url: "https://sentence-segmentation.onrender.com",
+    url: "https://sentence.pecha.tools",
   },
   {
     name: "glyph annotation",

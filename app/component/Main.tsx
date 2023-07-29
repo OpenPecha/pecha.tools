@@ -1,16 +1,15 @@
 import { Link, useLoaderData } from "@remix-run/react";
 
 function Main() {
-  const { status, user } = useLoaderData();
+  const { status } = useLoaderData();
   return (
     <main>
       <h1>Tools</h1>
       <section>
         <div className="tool-list">
-          {user &&
-            status.map((list) => {
-              return <Tool list={list} key={list.name} />;
-            })}
+          {status.map((list) => {
+            return <Tool list={list} key={list.name} />;
+          })}
         </div>
       </section>
     </main>

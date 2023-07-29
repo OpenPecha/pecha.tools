@@ -3,9 +3,13 @@ import React from "react";
 
 function UserInfo() {
   const { user } = useLoaderData();
-  let { username } = user;
-
-  return <div style={{ padding: 20 }}>Welcome, {username} !</div>;
+  if (!user)
+    return (
+      <div style={{ color: "red", fontFamily: "sans-serif", padding: 20 }}>
+        login to use tools
+      </div>
+    );
+  return <div style={{ padding: 20 }}>Welcome, {user?.username} !</div>;
 }
 
 export default UserInfo;
