@@ -1,6 +1,7 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import Header from "~/component/Header";
 import { toolList } from "~/constant";
 import { authenticator } from "~/services/auth.server";
 import { getUserSession } from "~/services/session.server";
@@ -13,13 +14,16 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   let filtered = toolList.filter((tool) => tool.name === toolname);
   let user = await getUserSession(request);
   let url = filtered[0].url + "?session=" + user.email;
+
   return {
     url,
+    toolname,
+    user,
   };
 };
 
 function Tool() {
-  const { url } = useLoaderData();
+  const { url, toolname } = useLoaderData();
   const [loaded, setLoaded] = useState(false);
   const iframeRef = useRef(null);
   function onLoadFunction() {
@@ -30,10 +34,16 @@ function Tool() {
     console.log("loaded");
   }
   return (
-    <div style={{ maxWidth: "100vw", maxHeight: "100vh", overflow: "hidden" }}>
-      {!loaded && <Loading />}
-      <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
-    </div>
+    <>
+      <Header />
+
+      <div
+        style={{ maxWidth: "100vw", maxHeight: "100vh", overflow: "hidden" }}
+      >
+        {!loaded && <Loading />}
+        <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
+      </div>
+    </>
   );
 }
 

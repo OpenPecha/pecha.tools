@@ -7,7 +7,9 @@ function Header() {
 
   return (
     <header className="header">
-      <h1 className="title">Pecha Tools</h1>
+      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <h1 className="title">Pecha Tools</h1>
+      </Link>
       <nav className="nav">
         {user?.picture && (
           <img
