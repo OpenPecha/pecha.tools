@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
 
-function Main() {
+function Main({ tools }) {
   const { status } = useLoaderData();
   return (
     <main>
@@ -10,23 +11,34 @@ function Main() {
           {status.map((list) => {
             return <Tool list={list} key={list.name} />;
           })}
+          {!tools.error && <ProdigyTools tool={tools} />}
         </div>
       </section>
     </main>
   );
 }
-
+const linkStyle = {
+  textDecoration: "none",
+  fontFamily: "serif",
+  color: "black",
+};
 function Tool({ list }) {
-  const linkStyle = {
-    textDecoration: "none",
-    fontFamily: "serif",
-    color: "black",
-  };
   return (
     <div className="tool-item">
       <Link to={"/tool/" + list.name} style={linkStyle}>
         <div className={"tool-icon " + list.name}></div>
         <div className="tool-name">{list.name}</div>
+      </Link>
+    </div>
+  );
+}
+
+function ProdigyTools({ tool }) {
+  return (
+    <div className="tool-item">
+      <Link to={"/tool/" + tool.department} style={linkStyle}>
+        <div className={"tool-icon " + tool.department}></div>
+        <div className="tool-name">{tool.department}</div>
       </Link>
     </div>
   );

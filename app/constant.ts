@@ -7,8 +7,4 @@ export let toolList = [
     name: "segment sentence",
     url: "https://sentence.pecha.tools",
   },
-  {
-    name: "glyph annotation",
-    url: "https://work.pecha.tools/glyph_annotation/",
-  },
 ];

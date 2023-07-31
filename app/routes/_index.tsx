@@ -1,8 +1,13 @@
-import type { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import {
+  defer,
+  type LoaderFunction,
+  type V2_MetaFunction,
+} from "@remix-run/node";
+import { Await, Form, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
+import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
 import History from "~/component/History";
-import Login from "~/component/Login";
 import Main from "~/component/Main";
 import UserInfo from "~/component/UserInfo";
 import { toolList } from "~/constant";
@@ -18,7 +23,8 @@ export const loader: LoaderFunction = async ({ request }) => {
     return { name: list.name, data: res.users || null, url: list.url };
   });
   let status = await Promise.all(data);
-  return { user, status };
+  let tools = await fetchToolInfo(user.username);
+  return defer({ user, status, tools });
 };
 
 export const meta: V2_MetaFunction = () => {
@@ -32,12 +38,20 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
+  let data = useLoaderData();
   return (
     <div>
       <Header />
       <UserInfo />
       <div className="container">
-        <Main />
+        <Suspense fallback={<p>Loading package location...</p>}>
+          <Await
+            resolve={data.tools}
+            errorElement={<p>Error loading package location!</p>}
+          >
+            {(tools) => <Main tools={tools} />}
+          </Await>
+        </Suspense>
         <History />
       </div>
     </div>

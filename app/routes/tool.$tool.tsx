@@ -1,6 +1,7 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
 import { toolList } from "~/constant";
 import { authenticator } from "~/services/auth.server";
@@ -11,10 +12,18 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     failureRedirect: "/",
   });
   let toolname = params.tool;
-  let filtered = toolList.filter((tool) => tool.name === toolname);
   let user = await getUserSession(request);
-  let url = filtered[0].url + "?session=" + user.email;
+  let tool = await fetchToolInfo(user.username);
+  let tool_name = tool?.department;
+  if (tool_name) {
+    return {
+      url: tool.url,
+      user,
+    };
+  }
 
+  let filtered = toolList.filter((tool) => tool.name === toolname);
+  let url = filtered[0].url + "?session=" + user.email;
   return {
     url,
     toolname,
@@ -23,7 +32,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 function Tool() {
-  const { url, toolname } = useLoaderData();
+  const { url } = useLoaderData();
   const [loaded, setLoaded] = useState(false);
   const iframeRef = useRef(null);
   function onLoadFunction() {
@@ -31,15 +40,12 @@ function Tool() {
     if (iframe) {
     }
     setLoaded(true);
-    console.log("loaded");
   }
   return (
     <>
       <Header />
 
-      <div
-        style={{ maxWidth: "100vw", maxHeight: "100vh", overflow: "hidden" }}
-      >
+      <div className="iframe-container">
         {!loaded && <Loading />}
         <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
       </div>

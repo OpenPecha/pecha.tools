@@ -1,6 +1,7 @@
 @import "main.css";
 :root {
   --card-hover: #fe5;
+  --header-height: 40px;
 }
 * {
   margin: 0;
@@ -14,6 +15,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: var(--header-height);
+}
+.iframe-container {
+  overflow: hidden;
+  height: calc(100vh - var(--header-height));
 }
 .container {
   display: flex;
