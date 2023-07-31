@@ -2,10 +2,13 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
 
 function Main({ tools }) {
-  const { status } = useLoaderData();
+  const { user, status } = useLoaderData();
   return (
     <main>
-      <h1 className="tool-list-title">Annotation Tools</h1>
+      <h1 className="tool-list-title">Annotation Tools </h1>
+      {!user && (
+        <div style={{ color: "red", marginBottom: 8 }}>login to use tools</div>
+      )}
       <section>
         <div className="tool-list">
           {status.map((list) => {
