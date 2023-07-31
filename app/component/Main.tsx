@@ -11,7 +11,7 @@ function Main({ tools }) {
           {status.map((list) => {
             return <Tool list={list} key={list.name} />;
           })}
-          {!tools.error && <ProdigyTools tool={tools} />}
+          {!tools?.error && <ProdigyTools tool={tools} />}
         </div>
       </section>
     </main>
@@ -34,6 +34,7 @@ function Tool({ list }) {
 }
 
 function ProdigyTools({ tool }) {
+  if (!tool?.department) return null;
   return (
     <div className="tool-item">
       <Link to={"/tool/" + tool.department} style={linkStyle}>

@@ -67,7 +67,7 @@
   border: none;
   padding: 8px 16px;
   cursor: pointer;
-  border: 1px solid white;
+  fill: white;
 }
 .h1 {
   font-size: clamp(38px, 5vw, 54px);

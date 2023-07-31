@@ -9,7 +9,6 @@ import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
 import History from "~/component/History";
 import Main from "~/component/Main";
-import UserInfo from "~/component/UserInfo";
 import { toolList } from "~/constant";
 import { getUserSession } from "~/services/session.server";
 
@@ -42,7 +41,6 @@ export default function Index() {
   return (
     <div>
       <Header />
-      <UserInfo />
       <div className="container">
         <Suspense fallback={<p>Loading package location...</p>}>
           <Await
