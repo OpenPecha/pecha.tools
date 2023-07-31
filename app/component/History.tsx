@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 
 function History() {
   const { user, status } = useLoaderData();
-  if (!user || !status) return null;
+  if (!user || !status?.length) return null;
   return (
     <div
       style={{ flex: 1, maxWidth: 340, border: "1px solid black", margin: 20 }}
