@@ -1,5 +1,6 @@
 import {
   defer,
+  json,
   type LoaderFunction,
   type V2_MetaFunction,
 } from "@remix-run/node";
@@ -14,6 +15,7 @@ import { getUserSession } from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
+  let tools = fetchToolInfo(user?.email);
 
   if (!user) return { user, status: toolList };
   let data = toolList.map(async (list) => {
@@ -22,7 +24,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     return { name: list.name, data: res.users || null, url: list.url };
   });
   let status = await Promise.all(data);
-  let tools = await fetchToolInfo(user.username);
   return defer({ user, status, tools });
 };
 

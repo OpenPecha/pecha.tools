@@ -1,5 +1,4 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import { useEffect } from "react";
 
 function Main({ tools }) {
   const { user, status } = useLoaderData();

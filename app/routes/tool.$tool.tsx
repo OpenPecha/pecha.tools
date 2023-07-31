@@ -13,11 +13,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   });
   let toolname = params.tool;
   let user = await getUserSession(request);
-  let tool = await fetchToolInfo(user.username);
+  let tool = await fetchToolInfo(user?.email);
   let tool_name = tool?.department;
   if (tool_name) {
     return {
-      url: tool.url,
+      url: "Https://" + tool.url,
       user,
     };
   }
