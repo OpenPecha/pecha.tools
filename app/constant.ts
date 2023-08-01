@@ -1,10 +1,17 @@
 export let toolList = [
   {
-    name: "segment word",
+    name: "word segmentor",
     url: "https://word.pecha.tools",
+    needUser: true,
   },
   {
-    name: "segment sentence",
+    name: "sentence segmentor",
     url: "https://sentence.pecha.tools",
+    needUser: true,
+  },
+  {
+    name: "post editor",
+    url: "https://post-editor.pecha.tools",
+    needUser: false,
   },
 ];

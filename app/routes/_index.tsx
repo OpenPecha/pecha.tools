@@ -19,6 +19,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (!user) return { user, status: toolList };
   let data = toolList.map(async (list) => {
+    if (!list.needUser) return { name: list.name, url: list.url };
     let data = await fetch(list.url + "/api/user/" + user.username);
     let res = await data.json();
     return { name: list.name, data: res.users || null, url: list.url };

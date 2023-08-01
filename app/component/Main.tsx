@@ -11,7 +11,8 @@ function Main({ tools }) {
       <section>
         <div className="tool-list">
           {status.map((list) => {
-            return <Tool list={list} key={list.name} />;
+            let disabled = list.needUser ? !user : false;
+            return <Tool list={list} key={list.name} disabled={disabled} />;
           })}
           {!tools?.error && <ProdigyTools tool={tools} />}
         </div>
@@ -24,9 +25,9 @@ const linkStyle = {
   fontFamily: "serif",
   color: "black",
 };
-function Tool({ list }) {
+function Tool({ list, disabled }) {
   return (
-    <div className="tool-item">
+    <div className="tool-item" style={{ opacity: disabled ? 0.4 : 1 }}>
       <Link to={"/tool/" + list.name} style={linkStyle}>
         <div className={"tool-icon " + list.name}></div>
         <div className="tool-name">{list.name}</div>

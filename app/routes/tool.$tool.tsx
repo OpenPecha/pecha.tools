@@ -11,24 +11,26 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   await authenticator.isAuthenticated(request, {
     failureRedirect: "/",
   });
-  let toolname = params.tool;
   let user = await getUserSession(request);
-  let tool = await fetchToolInfo(user?.email);
-  let tool_name = tool?.department;
-  if (tool_name) {
+  let toolname = params.tool;
+  if (toolList.find((d) => d.name === toolname)) {
+    let filtered = toolList.filter((tool) => tool.name === toolname);
+    let url = filtered[0].url + "?session=" + user.email;
     return {
-      url: "Https://" + tool.url,
+      url,
+      toolname,
       user,
     };
   }
+  let tool = await fetchToolInfo(user?.email);
 
-  let filtered = toolList.filter((tool) => tool.name === toolname);
-  let url = filtered[0].url + "?session=" + user.email;
-  return {
-    url,
-    toolname,
-    user,
-  };
+  let tool_name = tool?.department;
+  if (tool_name) {
+    return {
+      url: "https://" + tool.url,
+      user,
+    };
+  }
 };
 
 function Tool() {
