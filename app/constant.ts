@@ -14,8 +14,4 @@ export let toolList = [
     url: "https://post-editor.pecha.tools",
     needUser: false,
   },
-  {
-    name: "glyph annotation",
-    url: "https://work.pecha.tools/glyph_annotation/",
-  },
 ];
