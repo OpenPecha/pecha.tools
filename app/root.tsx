@@ -8,11 +8,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import globalStyle from "~/style/global.css";
+import tailwindStyle from "~/style/tailwind.css";
+
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
     href: globalStyle,
   },
+  { rel: "stylesheet", href: tailwindStyle },
 ];
 
 export function ErrorBoundary({ error }) {
