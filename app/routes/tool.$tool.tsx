@@ -46,7 +46,6 @@ function Tool() {
   return (
     <>
       <Header />
-
       <div className="iframe-container">
         {!loaded && <Loading />}
         <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>

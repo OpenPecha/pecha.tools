@@ -1,7 +1,7 @@
 @import "main.css";
 :root {
   --card-hover: #fe5;
-  --header-height: 40px;
+  --header-height: 60px;
 }
 * {
   margin: 0;
@@ -9,12 +9,6 @@
   box-sizing: border-box;
 }
 .header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: var(--header-height);
 }
 .iframe-container {
