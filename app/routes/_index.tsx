@@ -43,7 +43,7 @@ export default function Index() {
   return (
     <div>
       <Header />
-      <div className="container">
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Suspense fallback={<p>Loading package location...</p>}>
           <Await
             resolve={data.tools}
@@ -52,7 +52,6 @@ export default function Index() {
             {(tools) => <Main tools={tools} />}
           </Await>
         </Suspense>
-        <History />
       </div>
     </div>
   );

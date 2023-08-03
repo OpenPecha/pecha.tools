@@ -27,7 +27,10 @@ const linkStyle = {
 };
 function Tool({ list, disabled }) {
   return (
-    <div className="tool-item" style={{ opacity: disabled ? 0.4 : 1 }}>
+    <div
+      className="tool-item min-w-fit "
+      style={{ opacity: disabled ? 0.4 : 1 }}
+    >
       <Link to={"/tool/" + list.name} style={linkStyle}>
         <div className={"tool-icon " + list.name}></div>
         <div className="tool-name">{list.name}</div>
