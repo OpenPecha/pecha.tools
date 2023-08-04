@@ -13,6 +13,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   });
   let user = await getUserSession(request);
   let toolname = params.tool;
+  toolname = toolname?.replace("_", " ");
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.filter((tool) => tool.name === toolname);
     let url = filtered[0].url + "?session=" + user.email;

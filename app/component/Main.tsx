@@ -31,7 +31,7 @@ function Tool({ list, disabled }) {
       className="tool-item min-w-fit "
       style={{ opacity: disabled ? 0.4 : 1 }}
     >
-      <Link to={"/tool/" + list.name} style={linkStyle}>
+      <Link to={"/tool/" + list.name.replace(" ", "_")} style={linkStyle}>
         <div className={"tool-icon " + list.name}></div>
         <div className="tool-name">{list.name}</div>
       </Link>
