@@ -53,7 +53,7 @@ function Main({ tools }) {
             let disabled = list.needUser ? !user : false;
             return (
               <div onClick={checkAuth} className="text-center mx-auto">
-                <Tool list={list} key={list.name} disabled={disabled} />;
+                <Tool list={list} key={list.name} disabled={disabled} />
               </div>
             );
           })}
