@@ -72,7 +72,7 @@ function Tool({ list, disabled }) {
   return (
     <Link to={"/tool/" + list.name.replace(" ", "_")} style={linkStyle}>
       <div
-        className="card w-30 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
+        className="card  w-30 bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
         style={{ opacity: disabled ? 0.4 : 1 }}
       >
         <figure className="hidden md:block">
@@ -88,7 +88,7 @@ function ProdigyTools({ tool }) {
   if (!tool?.department) return null;
   return (
     <Link to={"/tool/" + tool.department} style={linkStyle}>
-      <div className="card max-w-20 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
+      <div className="card max-w-20 bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
         <figure className="hidden md:block">
           <div className={"tool-icon " + tool.department}></div>
         </figure>
