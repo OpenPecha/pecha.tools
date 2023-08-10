@@ -57,27 +57,27 @@ function Main({ tools }) {
               </div>
             );
           })}
-          {!tools?.error && <ProdigyTools tool={tools} />}
+          {!tools?.error && (
+            <div className="text-center mx-auto w-48">
+              <ProdigyTools tool={tools} />
+            </div>
+          )}
         </div>
       </section>
     </main>
   );
 }
-const linkStyle = {
-  textDecoration: "none",
-  fontFamily: "serif",
-  color: "black",
-};
+
 function Tool({ list, disabled }) {
   return (
-    <Link to={"/tool/" + list.name.replace(" ", "_")} style={linkStyle}>
+    <Link to={"/tool/" + list.name.replace(" ", "_")}>
       <div
-        className="card  w-30 bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
+        className="card  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
         style={{ opacity: disabled ? 0.4 : 1 }}
       >
-        <figure className="hidden md:block">
+        <div className="hidden md:block">
           <div className={"tool-icon " + list.name}></div>
-        </figure>
+        </div>
         <div className="card-body uppercase text-center">{list.name}</div>
       </div>
     </Link>
@@ -87,11 +87,11 @@ function Tool({ list, disabled }) {
 function ProdigyTools({ tool }) {
   if (!tool?.department) return null;
   return (
-    <Link to={"/tool/" + tool.department} style={linkStyle}>
-      <div className="card max-w-20 bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
-        <figure className="hidden md:block">
+    <Link to={"/tool/" + tool.department}>
+      <div className="card  bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
+        <div className="hidden md:block">
           <div className={"tool-icon " + tool.department}></div>
-        </figure>
+        </div>
         <div className="card-body uppercase text-center">{tool.department}</div>
       </div>
     </Link>
