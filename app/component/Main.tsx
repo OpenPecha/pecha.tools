@@ -2,7 +2,7 @@ import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 let timer;
 function Main({ tools }) {
-  const { user, status } = useLoaderData();
+  const { user } = useLoaderData();
   const [showMessage, setShowMessage] = useState(false);
   function checkAuth() {
     if (timer) clearTimeout(timer);
@@ -49,23 +49,14 @@ function Main({ tools }) {
       {/* )} */}
       <section>
         <div className="mx-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 px-[20px]">
-          {status.map((list) => {
+          {tools.map((list) => {
             let disabled = list.needUser ? !user : false;
             return (
-              <div
-                onClick={checkAuth}
-                className="text-center mx-auto"
-                key={list.name}
-              >
+              <div onClick={checkAuth} className=" rounded-lg" key={list.name}>
                 <Tool list={list} key={list.name} disabled={disabled} />
               </div>
             );
           })}
-          {!tools?.error && (
-            <div className="text-center mx-auto w-48">
-              <ProdigyTools tool={tools} />
-            </div>
-          )}
         </div>
       </section>
     </main>
@@ -74,39 +65,33 @@ function Main({ tools }) {
 
 function Tool({ list, disabled }) {
   return (
-    <Link to={"/tool/" + list.name.replace(" ", "_")}>
-      <div
-        className="card  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
-        style={{ opacity: disabled ? 0.4 : 1 }}
+    <>
+      <Link
+        to={"/tool/" + list.name.replace(" ", "_")}
+        className={` text-center w-full ${!list.url && "pointer-events-none"}`}
       >
-        <div className="hidden md:block">
-          <div className={"tool-icon " + list.name}></div>
+        <div
+          className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
+          style={{ opacity: disabled ? 0.4 : 1 }}
+        >
+          <div className="hidden md:block">
+            <div
+              className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[100px] w-[100px]"
+              style={{ backgroundImage: `url("${list?.ICON}")` }}
+            ></div>
+          </div>
+          <div className="px-[2vw] py-4 uppercase text-center">{list.name}</div>
         </div>
-        <div className="px-[2vw] py-4 uppercase text-center">{list.name}</div>
-        {list.demo && (
-          <Link
-            to={"/demo/" + list.name.replace(" ", "_")}
-            className="uppercase text-center text text-gray-400 font-light hover:text-black"
-          >
-            demo
-          </Link>
-        )}
-      </div>
-    </Link>
-  );
-}
-
-function ProdigyTools({ tool }) {
-  if (!tool?.department) return null;
-  return (
-    <Link to={"/tool/" + tool.department}>
-      <div className="card  bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
-        <div className="hidden md:block">
-          <div className={"tool-icon " + tool.department}></div>
-        </div>
-        <div className="card-body uppercase text-center">{tool.department}</div>
-      </div>
-    </Link>
+      </Link>
+      {list.demo && (
+        <Link
+          to={"/demo/" + list.name.replace(" ", "_")}
+          className="uppercase text-sm text-gray-400 font-light hover:text-black bg-white px-2 "
+        >
+          demo
+        </Link>
+      )}
+    </>
   );
 }
 

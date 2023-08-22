@@ -3,9 +3,9 @@ import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
-import { toolList } from "~/constant";
 import { authenticator } from "~/services/auth.server";
 import { getUserSession } from "~/services/session.server";
+import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   await authenticator.isAuthenticated(request, {
@@ -14,21 +14,16 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   let user = await getUserSession(request);
   let toolname = params.tool;
   toolname = toolname?.replace("_", " ");
+  let toolList = await getCombineTools(user.email);
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.filter((tool) => tool.name === toolname);
-    let url = filtered[0].url + "?session=" + user.email;
+    let url = "https://" + filtered[0].url;
+    if (!filtered[0].url.includes("work")) {
+      url = filtered[0].url + "?session=" + user.email;
+    }
     return {
       url,
       toolname,
-      user,
-    };
-  }
-  let tool = await fetchToolInfo(user?.email);
-
-  let tool_name = tool?.department;
-  if (tool_name) {
-    return {
-      url: "https://" + tool.url,
       user,
     };
   }
