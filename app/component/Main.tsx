@@ -76,7 +76,7 @@ function Tool({ list, disabled }) {
         >
           <div className="hidden md:block">
             <div
-              className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[100px] w-[100px]"
+              className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[110px] w-[110px]"
               style={{ backgroundImage: `url("${list?.ICON}")` }}
             ></div>
           </div>
