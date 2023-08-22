@@ -3,6 +3,7 @@ export let toolList = [
     name: "word segmentor",
     url: "https://word.pecha.tools",
     needUser: false,
+    demo: "https://word.pecha.tools/demo",
   },
   {
     name: "sentence segmentor",

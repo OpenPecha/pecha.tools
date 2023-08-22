@@ -52,7 +52,11 @@ function Main({ tools }) {
           {status.map((list) => {
             let disabled = list.needUser ? !user : false;
             return (
-              <div onClick={checkAuth} className="text-center mx-auto">
+              <div
+                onClick={checkAuth}
+                className="text-center mx-auto"
+                key={list.name}
+              >
                 <Tool list={list} key={list.name} disabled={disabled} />
               </div>
             );
@@ -78,7 +82,15 @@ function Tool({ list, disabled }) {
         <div className="hidden md:block">
           <div className={"tool-icon " + list.name}></div>
         </div>
-        <div className="card-body uppercase text-center">{list.name}</div>
+        <div className="px-[2vw] py-4 uppercase text-center">{list.name}</div>
+        {list.demo && (
+          <Link
+            to={"/demo/" + list.name.replace(" ", "_")}
+            className="uppercase text-center text text-gray-400 font-light hover:text-black"
+          >
+            demo
+          </Link>
+        )}
       </div>
     </Link>
   );
