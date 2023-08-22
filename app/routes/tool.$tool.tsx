@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   });
   let user = await getUserSession(request);
   let toolname = params.tool;
-  toolname = toolname?.replace("_", " ");
+
   let toolList = await getCombineTools(user.email);
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.filter((tool) => tool.name === toolname);
@@ -27,6 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       user,
     };
   }
+  return null;
 };
 
 function Tool() {

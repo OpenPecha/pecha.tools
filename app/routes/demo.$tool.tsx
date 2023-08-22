@@ -1,13 +1,11 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
-import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
 import { toolList } from "~/constant";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   let toolname = params.tool;
-  toolname = toolname?.replace("_", " ");
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.find((tool) => tool.name === toolname);
     let url = filtered?.demo;

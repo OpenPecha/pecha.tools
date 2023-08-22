@@ -80,12 +80,14 @@ function Tool({ list, disabled }) {
               style={{ backgroundImage: `url("${list?.ICON}")` }}
             ></div>
           </div>
-          <div className="px-[2vw] py-4 uppercase text-center">{list.name}</div>
+          <div className="px-[2vw] py-4 uppercase text-center">
+            {list.name.replaceAll("_", " ")}
+          </div>
         </div>
       </Link>
       {list.demo && (
         <Link
-          to={"/demo/" + list.name.replace(" ", "_")}
+          to={"/demo/" + list.name}
           className="uppercase text-sm text-gray-400 font-light hover:text-black bg-white px-2 "
         >
           demo
