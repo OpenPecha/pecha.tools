@@ -13,7 +13,7 @@ import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
-  let toolList = await getCombineTools(user.email);
+  let toolList = await getCombineTools(user?.email);
   return defer({ user, tools: toolList });
 };
 
