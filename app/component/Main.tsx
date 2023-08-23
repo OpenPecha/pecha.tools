@@ -2,7 +2,6 @@ import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 let timer;
 function Main({ tools }) {
-  console.log(tools);
   const { user } = useLoaderData();
   const [showMessage, setShowMessage] = useState(false);
   function checkAuth() {
