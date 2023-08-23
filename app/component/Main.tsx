@@ -2,6 +2,7 @@ import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 let timer;
 function Main({ tools }) {
+  console.log(tools);
   const { user } = useLoaderData();
   const [showMessage, setShowMessage] = useState(false);
   function checkAuth() {
@@ -50,10 +51,9 @@ function Main({ tools }) {
       <section>
         <div className="mx-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 px-[20px]">
           {tools.map((list) => {
-            let disabled = list.needUser ? !user : false;
             return (
               <div onClick={checkAuth} className=" rounded-lg" key={list.name}>
-                <Tool list={list} key={list.name} disabled={disabled} />
+                <Tool list={list} key={list.name} />
               </div>
             );
           })}
@@ -63,17 +63,14 @@ function Main({ tools }) {
   );
 }
 
-function Tool({ list, disabled }) {
+function Tool({ list }) {
   return (
     <>
       <Link
         to={"/tool/" + list.name.replace(" ", "_")}
         className={` text-center w-full ${!list.url && "pointer-events-none"}`}
       >
-        <div
-          className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out"
-          style={{ opacity: disabled ? 0.4 : 1 }}
-        >
+        <div className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
           <div className="hidden md:block">
             <div
               className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[110px] w-[110px]"
