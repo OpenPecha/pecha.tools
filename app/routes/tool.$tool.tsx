@@ -1,4 +1,4 @@
-import { LoaderFunction } from "@remix-run/node";
+import { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import { fetchToolInfo } from "~/api/getUserToolInfo";
@@ -28,6 +28,17 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     };
   }
   return null;
+};
+
+export const meta: V2_MetaFunction = ({ params }) => {
+  let toolname = params.tool;
+  return [
+    { title: `Pecha_tools | ${toolname}` },
+    {
+      name: "description",
+      content: "pecha tools is collection of tool used for mt",
+    },
+  ];
 };
 
 function Tool() {
