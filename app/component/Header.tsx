@@ -13,7 +13,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const { user } = useLoaderData();
-
+  const isAdmin = user.role === "admin";
   return (
     <Disclosure as="nav" className="bg-gray-800 header">
       {({ open }) => (
@@ -73,6 +73,20 @@ export default function Header() {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to={"/dashboard"}
+                              className={classNames(
+                                isAdmin ? "" : "hidden",
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Dashboard
+                            </Link>
+                          )}
+                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <Link

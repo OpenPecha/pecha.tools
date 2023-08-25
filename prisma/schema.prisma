@@ -15,7 +15,7 @@ model User {
   email String  @unique
   username  String?
   picture String?
-  role role?
+  role role? @default(annotator)
 }
 
 enum role{
