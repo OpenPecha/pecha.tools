@@ -1,5 +1,6 @@
 import {
   defer,
+  redirect,
   type LoaderFunction,
   type V2_MetaFunction,
 } from "@remix-run/node";
@@ -14,6 +15,7 @@ import { getCombineTools } from "~/utils/combineTools";
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
   let toolList = await getCombineTools(user?.email);
+  if (!user) redirect("/");
   return defer({ user, tools: toolList });
 };
 
