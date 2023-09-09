@@ -6,14 +6,15 @@ import {
 } from "@remix-run/node";
 import { Await, Form, useLoaderData } from "@remix-run/react";
 import { Suspense } from "react";
-import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
+import { getOrCreateUser } from "~/modal/user";
 import { getUserSession } from "~/services/session.server";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  let user = await getUserSession(request);
+  let session = await getUserSession(request);
+  let user = await getOrCreateUser(session);
   let toolList = await getCombineTools(user?.email);
   if (!user) redirect("/");
   return defer({ user, tools: toolList });
