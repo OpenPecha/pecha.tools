@@ -14,9 +14,12 @@ import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let session = await getUserSession(request);
-  let user = await getOrCreateUser(session);
-  let toolList = await getCombineTools(user?.email);
-  if (!user) redirect("/");
+  let user = null;
+  if (session) {
+    user = await getOrCreateUser(session);
+    if (!user) redirect("/");
+  }
+  let toolList = await getCombineTools(session);
   return defer({ user, tools: toolList });
 };
 
