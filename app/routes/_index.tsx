@@ -13,13 +13,8 @@ import { getUserSession } from "~/services/session.server";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  let session = await getUserSession(request);
-  let user = null;
-  if (session) {
-    user = await getOrCreateUser(session);
-    if (!user) redirect("/");
-  }
-  let toolList = await getCombineTools(session);
+  let user = await getUserSession(request);
+  let toolList = await getCombineTools(user);
   return defer({ user, tools: toolList });
 };
 
