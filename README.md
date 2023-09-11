@@ -47,13 +47,8 @@ set Environment variables as:
 
 # getUserData
 
-endpoint ->
-
 ```javascript
-{
-  domainName;
-}
-+"/api/user?email=" + { userEmail };
+endpoint = domainName + "/api/user?email=" + userEmail;
 ```
 
 **word segmentation tool** is build using Remix and tiptap.
