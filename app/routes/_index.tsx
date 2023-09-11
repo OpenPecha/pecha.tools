@@ -4,18 +4,24 @@ import {
   type LoaderFunction,
   type V2_MetaFunction,
 } from "@remix-run/node";
-import { Await, Form, useLoaderData } from "@remix-run/react";
+import { Await, useLoaderData } from "@remix-run/react";
 import { Suspense } from "react";
+import { useRecoilValue } from "recoil";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
-import { getOrCreateUser } from "~/modal/user";
 import { getUserSession } from "~/services/session.server";
+import { isAuthenticated, userProfileState } from "~/store";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
   let toolList = await getCombineTools(user?.email);
-  return defer({ user, tools: toolList });
+  let { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV } = process.env;
+  return defer({
+    user,
+    tools: toolList,
+    env: { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV },
+  });
 };
 
 export const meta: V2_MetaFunction = () => {

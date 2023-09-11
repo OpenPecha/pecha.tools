@@ -1,17 +1,13 @@
-import { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
+import { LoaderFunction, V2_MetaFunction, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
-import { fetchToolInfo } from "~/api/getUserToolInfo";
 import Header from "~/component/Header";
-import { authenticator } from "~/services/auth.server";
 import { getUserSession } from "~/services/session.server";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  await authenticator.isAuthenticated(request, {
-    failureRedirect: "/",
-  });
   let user = await getUserSession(request);
+  if (!user) redirect("/");
   let toolname = params.tool;
 
   let toolList = await getCombineTools(user.email);
