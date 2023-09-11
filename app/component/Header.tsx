@@ -13,6 +13,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const { user } = useLoaderData();
+
   const isAdmin = user?.role === "admin";
   return (
     <Disclosure as="nav" className="bg-gray-800 header">
@@ -80,7 +81,7 @@ export default function Header() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              {user.username}
+                              {user.name}
                             </div>
                           )}
                         </Menu.Item>

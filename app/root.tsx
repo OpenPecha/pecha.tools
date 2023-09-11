@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { RecoilRoot } from "recoil";
 import globalStyle from "~/style/global.css";
 import tailwindStyle from "~/style/tailwind.css";
 
@@ -46,7 +47,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <RecoilRoot>
+          <Outlet />
+        </RecoilRoot>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
