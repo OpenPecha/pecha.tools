@@ -66,15 +66,18 @@ function Tool({ list }) {
   let { user } = useLoaderData();
   let navigate = useNavigate();
   let handleClick = () => {
-    if (user) navigate("/tool/" + list.name.replace(" ", "_"));
+    if (list.url) {
+      if (user) navigate("/tool/" + list.name.replace(" ", "_"));
+    }
+    if (!list.url) {
+      alert("you are not assigned to this tool");
+    }
   };
   return (
     <>
       <div
         onClick={handleClick}
-        className={`${user && "cursor-pointer"} text-center w-full ${
-          !list.url && "pointer-events-none"
-        }`}
+        className={`${user && "cursor-pointer"} text-center w-full `}
       >
         <div className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
           <div className="hidden md:block">
