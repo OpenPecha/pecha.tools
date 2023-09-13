@@ -30,21 +30,7 @@ function Main({ tools }) {
           transform: !showMessage ? "translateY(110%)" : "translateY(0)",
         }}
       >
-        <div className="alert alert-info">
-          Login by
-          <Form
-            action="/auth/auth0"
-            className="px-6 sm:px-0 max-w-sm"
-            method="post"
-          >
-            <button
-              type="submit"
-              className="link text-red-700 hover:text-black animate-pulse"
-            >
-              clicking here !!
-            </button>
-          </Form>
-        </div>
+        <div className="alert alert-info">Login to access the tools</div>
       </div>
       {/* )} */}
       <section>
