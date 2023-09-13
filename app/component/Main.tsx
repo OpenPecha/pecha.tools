@@ -1,4 +1,4 @@
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData, useNavigate } from "@remix-run/react";
 import { useState } from "react";
 let timer;
 function Main({ tools }) {
@@ -63,11 +63,18 @@ function Main({ tools }) {
 }
 
 function Tool({ list }) {
+  let { user } = useLoaderData();
+  let navigate = useNavigate();
+  let handleClick = () => {
+    if (user) navigate("/tool/" + list.name.replace(" ", "_"));
+  };
   return (
     <>
-      <Link
-        to={"/tool/" + list.name.replace(" ", "_")}
-        className={` text-center w-full ${!list.url && "pointer-events-none"}`}
+      <div
+        onClick={handleClick}
+        className={`${user && "cursor-pointer"} text-center w-full ${
+          !list.url && "pointer-events-none"
+        }`}
       >
         <div className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
           <div className="hidden md:block">
@@ -80,7 +87,7 @@ function Tool({ list }) {
             {list.name.replaceAll("_", " ")}
           </div>
         </div>
-      </Link>
+      </div>
       {list.demo && (
         <Link
           to={"/demo/" + list.name}

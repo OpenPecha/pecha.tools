@@ -10,7 +10,6 @@ import { useRecoilValue } from "recoil";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
 import { getUserSession } from "~/services/session.server";
-import { isAuthenticated, userProfileState } from "~/store";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
