@@ -3,13 +3,17 @@ import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import Header from "~/component/Header";
 import { toolList } from "~/constant";
+import { getUserSession } from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   let toolname = params.tool;
+  let user = await getUserSession(request);
+
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.find((tool) => tool.name === toolname);
     let url = filtered?.demo;
     return {
+      user,
       url,
       toolname,
     };
