@@ -8,7 +8,7 @@ import { getUserSession } from "~/services/session.server";
 export const loader: LoaderFunction = async ({ request, params }) => {
   let toolname = params.tool;
   let user = await getUserSession(request);
-
+  let { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV } = process.env;
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.find((tool) => tool.name === toolname);
     let url = filtered?.demo;
@@ -16,6 +16,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       user,
       url,
       toolname,
+      env: { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV },
     };
   }
 };

@@ -63,9 +63,9 @@ function Tool({ list }) {
     <>
       <div
         onClick={handleClick}
-        className={`${user && "cursor-pointer"} text-center w-full `}
+        className={`tool cursor-pointer text-center w-full relative overflow-hidden `}
       >
-        <div className="  w-full bg-white shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
+        <div className="  w-full bg-white  dark:bg-slate-500 rounded  shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
           <div className="hidden md:block">
             <div
               className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[110px] w-[110px]"
@@ -76,15 +76,15 @@ function Tool({ list }) {
             {list.name.replaceAll("_", " ")}
           </div>
         </div>
+        {list.demo && (
+          <Link
+            to={"/demo/" + list.name}
+            className="link absolute -bottom-5 right-0  uppercase text-sm text-gray-400 dark:bg-slate-600  dark:text-gray-200  font-light hover:text-black bg-white px-2 "
+          >
+            demo
+          </Link>
+        )}
       </div>
-      {list.demo && (
-        <Link
-          to={"/demo/" + list.name}
-          className="uppercase text-sm text-gray-400 font-light hover:text-black bg-white px-2 "
-        >
-          demo
-        </Link>
-      )}
     </>
   );
 }

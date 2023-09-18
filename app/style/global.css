@@ -79,3 +79,10 @@
     flex-direction: column;
   }
 }
+
+.tool:hover .link {
+  display: block;
+  text-decoration: none;
+  bottom: 0;
+  transition: all ease 0.5s;
+}
