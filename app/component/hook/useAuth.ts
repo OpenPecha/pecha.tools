@@ -41,7 +41,7 @@ export function useAuth0(config: any) {
             reject(err);
           } else {
             // route to password field component
-            resolve(res.email);
+            resolve(res?.email);
           }
         }
       );

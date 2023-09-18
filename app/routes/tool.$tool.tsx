@@ -10,12 +10,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (!user) redirect("/");
   let toolname = params.tool;
 
-  let toolList = await getCombineTools("spsither@gmail.com");
+  let toolList = await getCombineTools(user?.email);
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.filter((tool) => tool.name === toolname);
     let url = filtered[0].url;
     if (!filtered[0].url.includes("session")) {
-      url = filtered[0].url + "?session=" + user.email;
+      console.log(url);
+      url = filtered[0].url + "?session=" + user?.email;
     }
 
     return {

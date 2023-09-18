@@ -42,7 +42,7 @@ export default function Index() {
   useEffect(() => {
     if (!socket) return;
     if (user) {
-      socket?.emit("user_login", user.email);
+      socket?.emit("user_login", user?.email);
     }
     if (!user && socket.id) {
       socket?.emit("user_logout", socket.id);
