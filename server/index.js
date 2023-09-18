@@ -38,12 +38,18 @@ function deleteUser(socket_id) {
     }
   }
 }
+function notifyOnlineUsers() {
+  io.emit("user_online", Array.from(onlineUsers.keys()));
+}
 
 io.on("connection", (socket) => {
+  socket.on("get_online_users", () => {
+    notifyOnlineUsers();
+  });
   socket.on("user_login", (session) => {
     onlineUsers.set(session, socket.id);
     // Notify all clients that the user is now online
-    io.emit("user_online", Array.from(onlineUsers.keys()));
+    notifyOnlineUsers();
   });
   // from this point you are on the WS connection with a specific client
   socket.on("user_logout", (socket_id) => {

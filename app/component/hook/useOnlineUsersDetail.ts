@@ -6,6 +6,11 @@ export function useOnlineUsersDetail() {
   const socket = useSocket();
   useEffect(() => {
     if (!socket) return;
+    if (online.length === 0) {
+      socket.on("connect", () => {
+        socket.emit("get_online_users");
+      });
+    }
     socket.on("user_online", (users) => {
       setOnline(users);
     });
