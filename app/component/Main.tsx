@@ -65,7 +65,7 @@ function Tool({ list }) {
         onClick={handleClick}
         className={`tool cursor-pointer text-center w-full relative overflow-hidden `}
       >
-        <div className="  w-full bg-white  dark:bg-slate-500 dark:text-white rounded  shadow-xl hover:scale-105 transition-all duration-300 ease-in-out">
+        <div className="  w-full bg-white border-2 border-gray-300  dark:bg-slate-500 dark:text-white rounded  shadow-xl hover:scale-95 transition-all duration-300 ease-in-out">
           <div className="hidden md:block">
             <div
               className="p-2 rounded bg-transparent bg-no-repeat bg-center bg-contain mb-2 mx-auto grid place-items-center h-[110px] w-[110px]"
@@ -79,7 +79,7 @@ function Tool({ list }) {
         {list.demo && (
           <Link
             to={"/demo/" + list.name}
-            className="link absolute -bottom-5 right-0  uppercase text-sm text-gray-400 dark:bg-slate-600  dark:text-gray-200  font-light hover:text-black bg-white px-2 "
+            className="link absolute -bottom-5 right-0  uppercase text-sm text-gray-400 dark:bg-slate-600  dark:text-gray-200  font-light hover:text-black bg-gray-100  px-2 "
           >
             demo
           </Link>

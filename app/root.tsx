@@ -10,7 +10,9 @@ import {
 import { RecoilRoot } from "recoil";
 import globalStyle from "~/style/global.css";
 import tailwindStyle from "~/style/tailwind.css";
-
+import { SocketProvider, connect } from "./component/context/socket";
+import { useState, useEffect } from "react";
+import { Socket } from "socket.io-client";
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
@@ -38,6 +40,14 @@ export function ErrorBoundary({ error }) {
 }
 
 export default function App() {
+  const [socket, setSocket] = useState<Socket>();
+  useEffect(() => {
+    const socket = connect();
+    setSocket(socket);
+    return () => {
+      socket.close();
+    };
+  }, []);
   return (
     <html lang="en">
       <head>
@@ -47,9 +57,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <RecoilRoot>
-          <Outlet />
-        </RecoilRoot>
+        <SocketProvider socket={socket}>
+          <RecoilRoot>
+            <Outlet />
+          </RecoilRoot>
+        </SocketProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

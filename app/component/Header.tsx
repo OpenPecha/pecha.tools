@@ -60,7 +60,7 @@ export default function Header() {
                           className="h-8 w-8 rounded-full"
                           src={user?.picture}
                           title={user?.email}
-                          alt=""
+                          alt={user?.email}
                         />
                       </Menu.Button>
                     </div>

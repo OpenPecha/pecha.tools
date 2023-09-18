@@ -5,10 +5,11 @@ import {
   type V2_MetaFunction,
 } from "@remix-run/node";
 import { Await, useLoaderData } from "@remix-run/react";
-import { Suspense } from "react";
-import { useRecoilValue } from "recoil";
+import { Suspense, useEffect } from "react";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
+import { useSocket } from "~/component/context/socket";
+import { useOnlineUsersDetail } from "~/component/hook/useOnlineUsersDetail";
 import { getUserSession } from "~/services/session.server";
 import { getCombineTools } from "~/utils/combineTools";
 
@@ -35,6 +36,18 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   let data = useLoaderData();
+  let user = data?.user;
+  let socket = useSocket();
+  let onlineUsers = useOnlineUsersDetail();
+  useEffect(() => {
+    if (!socket) return;
+    if (user) {
+      socket?.emit("user_login", user.email);
+    }
+    if (!user && socket.id) {
+      socket?.emit("user_logout", socket.id);
+    }
+  }, [user, socket]);
   return (
     <div>
       <Header />
@@ -47,6 +60,7 @@ export default function Index() {
             {(tools) => <Main tools={tools} />}
           </Await>
         </Suspense>
+        <div className="mt-4">Active User : {onlineUsers.length}</div>
       </div>
     </div>
   );

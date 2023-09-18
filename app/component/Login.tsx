@@ -100,7 +100,7 @@ function LoginForm() {
         </div>
 
         <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-[426px]">
-          <div className="bg-white   sm:rounded-lg sm:px-12">
+          <div className="   sm:rounded-lg sm:px-12">
             {redirectEmail ? (
               <div></div>
             ) : (
@@ -138,7 +138,7 @@ function LoginForm() {
                 <div className="mb-8">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-stone-900"
+                    className="block text-sm font-medium leading-6 text-stone-900 dark:text-gray-300"
                   >
                     Email address
                   </label>
@@ -152,7 +152,7 @@ function LoginForm() {
                       autoFocus
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="block w-full rounded-md border-0 py-1.5 text-stone-900 shadow-sm ring-1 ring-inset ring-stone-300 placeholder:text-stone-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border-0 py-1.5 text-stone-900 dark:text-gray-300 pl-2 shadow-sm ring-1 ring-inset ring-stone-300 placeholder:text-stone-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
