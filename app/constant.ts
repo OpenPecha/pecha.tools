@@ -14,13 +14,13 @@ export let toolList = [
   },
   {
     name: "BO-EN_post_editor",
-    url: "https://post-editor.pecha.tools/bo2en",
+    url: "https://post-editor.pecha.tools/bo_en",
     needUser: false,
     ICON: "/svg/bo-en-translate.png",
   },
   {
     name: "EN-BO_post_editor",
-    url: "https://post-editor.pecha.tools/en2bo",
+    url: "https://post-editor.pecha.tools/en_bo",
     needUser: false,
     ICON: "/svg/en-bo-translate.png",
   },
