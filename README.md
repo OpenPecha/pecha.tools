@@ -6,55 +6,88 @@
 
 <h3 align="center">Pecha tool Home page</h3>
 
-<!-- Replace the title of the repository -->
+## Table of Contents
 
-<p align="center">
-  <a href="#description">Description</a> •
-  <a href="#install">Install</a> •
-  <a href="#environmentvariables">Environment Variables</a> •
-  <a href="#owners">Owners</a> •
-  <a href="#Acknowledgements">Acknowledgements</a> •
-</p>
-<hr>
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+- [Usage](#usage)
+- [Environment Variables](#environment-variables)
+- [Contributing](#contributing)
 
-## Description
+## Prerequisites
 
-Pecha tool web app
+Before you begin, ensure you have the following prerequisites installed and configured:
 
-## Install
+- **Node.js**: You must have Node.js installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
 
-Requires to have node and npm installed.
+- **PostgreSQL**: Ensure that you have a PostgreSQL database up and running. You will need the database connection information to configure the application.
 
-`$ npm install`
+- **Auth0 Account**: Sign up for an Auth0 account at [auth0.com](https://auth0.com/) and create an Auth0 application to obtain the necessary authentication credentials.
 
-## environmentvariables
+## Getting Started
 
-set Environment variables as:
+### Installation
 
-- DATABASE_URL
+1. Clone the repository:
 
-<!-- This section must link to the docs which are in the root of the repository in /docs -->
+   ```bash
+   git clone https://github.com/OpenPecha/pecha-tools-landing-page.git
+   ```
 
-## Owners
+2. Change into the project directory:
 
-- [@tenkus47](https://github.com/tenkus47)
+   ```bash
+   cd pecha-tools-landing-page
+   ```
 
-<!-- This section lists the owners of the repo -->
+3. Install the dependencies:
 
-## Acknowledgements
+   ```bash
+   npm install
+   ```
 
-## api
+### Configuration
 
-# getUserData
+1. Create a `.env` file in the root of the project and add the following environment variables:
 
-```javascript
-endpoint = domainName + "/api/user?email=" + userEmail;
+   ```env
+   # PostgreSQL Database Configuration
+   DATABASE_URL=your-db-connection-string
+
+   # Auth0 Configuration
+   AUTH0_DOMAIN=your-auth0-domain
+   AUTH0_CLIENT_ID=your-auth0-client-id
+   AUTH0_CLIENT_SECRET=your-auth0-client-secret
+   AUTH0_CALLBACK_URL=http://localhost:3000/callback # Adjust this URL for your environment
+   ```
+
+   Replace `your-db-connection-string`, `your-auth0-domain`, `your-auth0-client-id`, `your-auth0-client-secret` with your specific database and Auth0 credentials.
+
+2. You can also modify other configuration options in the `.env` file as needed for your application.
+
+## Usage
+
+To start the application, run the following command:
+
+```bash
+npm run dev
 ```
 
-**word segmentation tool** is build using Remix and tiptap.
+The application will be accessible at `http://localhost:3000` by default. You can change the port .
 
-We are always open to cooperation in introducing new features, tool integrations and testing solutions.
+## Environment Variables
 
-```
+Here are the environment variables required for the web:
 
-```
+- `DATABASE_URL`: The hostname or IP address of your PostgreSQL database server.connection string provided from the database eg. formatted:postgresql://[database-user]:[database-password]@[database-host]/[database-name]?schema=public
+
+- `AUTH0_DOMAIN`: Your Auth0 application's domain.
+- `AUTH0_CLIENT_ID`: The Client ID of your Auth0 application.
+- `AUTH0_CLIENT_SECRET`: The Client Secret of your Auth0 application.
+- `AUTH0_CALLBACK_URL`: The callback URL for Auth0 authentication.
+
+## Contributing
+
+We welcome contributions to improve . If you find a bug, have a feature request, or want to contribute code, please open an issue or create a pull request on our [GitHub repository](https://github.com/your-username/myapp).
