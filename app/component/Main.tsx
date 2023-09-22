@@ -15,7 +15,6 @@ function Main({ tools }) {
   }
   return (
     <main>
-      <h1 className="text-xl font-bold">Annotation Tools </h1>
       {/* {!user && showMessage && ( */}
       <div
         className="toast toast-start capitalize"

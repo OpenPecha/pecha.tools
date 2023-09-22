@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, NavLink, useLoaderData } from "@remix-run/react";
 import Login from "./Login";
 
 const navigation = [];
@@ -16,19 +16,28 @@ export default function Header() {
 
   const isAdmin = user?.role === "admin";
   return (
-    <Disclosure as="nav" className="bg-gray-800 header">
+    <Disclosure
+      as="nav"
+      className="bg-white dark:bg-gray-900  w-full z-20  border-b border-gray-200 dark:border-gray-600  header"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto  px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="flex flex-1 items-center  sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center gap-2 sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0">
-                  <Link to="/" className="h-8 w-auto">
-                    <h2 className="text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight">
+                  <NavLink
+                    to="/"
+                    className={({ isActive, isPending }) =>
+                      "h-8 w-auto text-gray-300"
+                    }
+                  >
+                    <h2 className="text-2xl font-bold leading-7 dark:text-white text-black sm:truncate sm:text-3xl sm:tracking-tight">
                       Pecha Tools
                     </h2>
-                  </Link>
+                  </NavLink>
                 </div>
+
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (

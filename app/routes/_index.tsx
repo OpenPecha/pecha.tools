@@ -4,8 +4,9 @@ import {
   type LoaderFunction,
   type V2_MetaFunction,
 } from "@remix-run/node";
-import { Await, useLoaderData } from "@remix-run/react";
+import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
 import { Suspense, useEffect } from "react";
+import Dashboard from "~/component/Dashboard";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
 import { useSocket } from "~/component/context/socket";
@@ -51,7 +52,16 @@ export default function Index() {
   return (
     <div>
       <Header />
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-10">
+        <div className="flex justify-between mt-2">
+          <h1 className="text-xl font-bold ">Tools </h1>
+          <div className="flex">
+            <Link to="/dashboard" className="btn btn-sm">
+              <h2 className="sm:truncate   sm:tracking-tight">Dashboard</h2>
+            </Link>
+          </div>
+        </div>
+
         <Suspense fallback={<p>Loading package location...</p>}>
           <Await
             resolve={data.tools}
@@ -60,7 +70,6 @@ export default function Index() {
             {(tools) => <Main tools={tools} />}
           </Await>
         </Suspense>
-        <div className="mt-4">Active User : {onlineUsers.length}</div>
       </div>
     </div>
   );

@@ -14,9 +14,8 @@ export default function Login() {
     <>
       <button
         onClick={() => loginRef.current?.showModal()}
-        className="text-white w-full  bg-[#3b5681] hover:bg-[#3b5681]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 "
+        className="btn btn-md btn-primary"
       >
-        <img src="/svg/login.png" />
         LOG IN<div></div>
       </button>
       <dialog ref={loginRef} className="modal">

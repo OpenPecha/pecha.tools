@@ -2,17 +2,19 @@ import React from "react";
 
 function Dashboard() {
   let iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const [loading, setLoading] = React.useState(true);
   return (
-    <div className="h-[calc(100dvh-90px)] w-screen overflow-scroll">
+    <>
+      {loading && <div>loading</div>}
       <iframe
         src="https://metabase.pecha.tools/public/dashboard/cdbff6e1-8727-49fb-a91c-7adea8602a4d#refresh=10"
         style={{ border: "0" }}
-        width="800"
-        height="600"
+        className="w-full h-screen"
         allowTransparency={true}
         ref={iframeRef}
+        onLoad={() => setLoading(false)}
       ></iframe>
-    </div>
+    </>
   );
 }
 
