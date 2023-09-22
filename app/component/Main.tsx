@@ -15,7 +15,6 @@ function Main({ tools }) {
   }
   return (
     <main>
-      {/* {!user && showMessage && ( */}
       <div
         className="toast toast-start capitalize"
         style={{
@@ -31,7 +30,6 @@ function Main({ tools }) {
       >
         <div className="alert alert-info">Login to access the tools</div>
       </div>
-      {/* )} */}
       <section>
         <div className="mx-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 px-[20px]">
           {tools.map((list) => {
