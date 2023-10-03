@@ -6,19 +6,24 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useFetchers,
+  useNavigation,
 } from "@remix-run/react";
 import { RecoilRoot } from "recoil";
 import globalStyle from "~/style/global.css";
 import tailwindStyle from "~/style/tailwind.css";
 import { SocketProvider, connect } from "./component/context/socket";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Socket } from "socket.io-client";
+import NProgress from "nprogress";
+import nProgressStyles from "nprogress/nprogress.css";
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
     href: globalStyle,
   },
   { rel: "stylesheet", href: tailwindStyle },
+  { rel: "stylesheet", href: nProgressStyles },
 ];
 
 export function ErrorBoundary({ error }) {
@@ -40,6 +45,8 @@ export function ErrorBoundary({ error }) {
 }
 
 export default function App() {
+  let transition = useNavigation();
+  let fetchers = useFetchers();
   const [socket, setSocket] = useState<Socket>();
   useEffect(() => {
     const socket = connect();
@@ -48,6 +55,25 @@ export default function App() {
       socket.close();
     };
   }, []);
+  let state = useMemo<"idle" | "loading">(
+    function getGlobalState() {
+      let states = [
+        transition.state,
+        ...fetchers.map((fetcher) => fetcher.state),
+      ];
+      if (states.every((state) => state === "idle")) return "idle";
+      return "loading";
+    },
+    [transition.state, fetchers]
+  );
+
+  useEffect(() => {
+    // and when it's something else it means it's either submitting a form or
+    // waiting for the loaders of the next location so we start it
+    if (state === "loading") NProgress.start();
+    // when the state is idle then we can to complete the progress bar
+    if (state === "idle") NProgress.done();
+  }, [transition.state]);
   return (
     <html lang="en">
       <head>
