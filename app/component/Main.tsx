@@ -1,4 +1,4 @@
-import { Form, Link, useLoaderData, useNavigate } from "@remix-run/react";
+import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 import { useState } from "react";
 let timer;
 function Main({ tools }) {
@@ -13,6 +13,7 @@ function Main({ tools }) {
       }, 3000);
     }
   }
+  console.log(tools);
   return (
     <main>
       <div

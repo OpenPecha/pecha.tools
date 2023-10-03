@@ -1,4 +1,7 @@
 {
+  "name": "pecha-tools-landing-page",
+  "author": "Tenzin Kunsang",
+  "version": "0.0.1",
   "private": true,
   "sideEffects": false,
   "scripts": {
