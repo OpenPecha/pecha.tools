@@ -1,14 +1,8 @@
-import {
-  defer,
-  redirect,
-  type LoaderFunction,
-  type V2_MetaFunction,
-} from "@remix-run/node";
+import { defer, type LoaderFunction } from "@remix-run/node";
 import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
 import { Suspense, useEffect } from "react";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
-import { useSocket } from "~/component/context/socket";
 import { getUserSession } from "~/services/session.server";
 import { Button } from "~/shadComponent/ui/button";
 import { getCombineTools } from "~/utils/combineTools";
@@ -24,7 +18,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-export const meta: V2_MetaFunction = () => {
+export const meta = () => {
   return [
     { title: "Pecha_tools" },
     {
@@ -36,17 +30,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   let data = useLoaderData();
-  let user = data?.user;
-  let socket = useSocket();
-  useEffect(() => {
-    if (!socket) return;
-    if (user) {
-      socket?.emit("user_login", user?.email);
-    }
-    if (!user && socket.id) {
-      socket?.emit("user_logout", socket.id);
-    }
-  }, [user, socket]);
+
   return (
     <div>
       <Header />
@@ -69,14 +53,7 @@ export default function Index() {
           </div>
         </div>
 
-        <Suspense fallback={<p>Loading package location...</p>}>
-          <Await
-            resolve={data.tools}
-            errorElement={<p>Error loading package location!</p>}
-          >
-            {(tools) => <Main tools={tools} />}
-          </Await>
-        </Suspense>
+        <Main tools={data.tools} />
       </div>
     </div>
   );

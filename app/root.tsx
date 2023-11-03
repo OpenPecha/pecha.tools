@@ -12,9 +12,7 @@ import {
 import { RecoilRoot } from "recoil";
 import globalStyle from "~/style/global.css";
 import tailwindStyle from "~/style/tailwind.css";
-import { SocketProvider, connect } from "./component/context/socket";
 import { useState, useEffect, useMemo } from "react";
-import { Socket } from "socket.io-client";
 import NProgress from "nprogress";
 import nProgressStyles from "nprogress/nprogress.css";
 import { Toaster } from "./shadComponent/ui/toaster";
@@ -53,14 +51,7 @@ export function ErrorBoundary({ error }) {
 export default function App() {
   let transition = useNavigation();
   let fetchers = useFetchers();
-  const [socket, setSocket] = useState<Socket>();
-  useEffect(() => {
-    const socket = connect();
-    setSocket(socket);
-    return () => {
-      socket.close();
-    };
-  }, []);
+
   let state = useMemo<"idle" | "loading">(
     function getGlobalState() {
       let states = [
@@ -89,12 +80,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <SocketProvider socket={socket}>
-          <RecoilRoot>
-            <Outlet />
-            <Toaster />
-          </RecoilRoot>
-        </SocketProvider>
+        <RecoilRoot>
+          <Outlet />
+          <Toaster />
+        </RecoilRoot>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
