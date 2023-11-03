@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader } from "~/shadComponent/ui/card";
 import { ToastAction } from "~/shadComponent/ui/toast";
 import { useToast } from "~/shadComponent/ui/use-toast";
 import getRandomLightColor from "~/utils/getRandomColor";
-import Login from "./Login";
 function Main({ tools }) {
   return (
     <main>
@@ -48,13 +47,14 @@ function Tool({ list, index }) {
 
   let handleClick = () => {
     checkAuth();
-    if (user) {
-      if (list.url) {
-        if (user) navigate("/tool/" + list.name.replace(" ", "_"));
-      }
-      if (!list.url) {
-        alert("you are not assigned to this tool");
-      }
+    if (list.url) {
+      if (user) navigate("/tool/" + list.name.replace(" ", "_"));
+    }
+    if (!list.url) {
+      toast.toast({
+        title: "No-access",
+        description: "you are not assigned to this tool",
+      });
     }
   };
   return (
