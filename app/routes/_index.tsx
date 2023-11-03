@@ -1,4 +1,4 @@
-import { defer, type LoaderFunction } from "@remix-run/node";
+import { defer, MetaFunction, type LoaderFunction } from "@remix-run/node";
 import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
 import { Suspense, useEffect } from "react";
 import Header from "~/component/Header";
@@ -18,7 +18,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-export const meta = () => {
+export const meta: MetaFunction = () => {
   return [
     { title: "Pecha_tools" },
     {

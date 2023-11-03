@@ -1,4 +1,4 @@
-import { LoaderFunction, V2_MetaFunction, redirect } from "@remix-run/node";
+import { LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import Header from "~/component/Header";
@@ -28,7 +28,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return null;
 };
 
-export const meta: V2_MetaFunction = ({ params }) => {
+export const meta: MetaFunction = ({ params }) => {
   let toolname = params.tool;
   return [
     { title: `Pecha_tools | ${toolname}` },
