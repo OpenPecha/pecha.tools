@@ -6,10 +6,9 @@ const { createRequestHandler } = require("@remix-run/express");
 const compression = require("compression");
 const express = require("express");
 const morgan = require("morgan");
-const { Server } = require("socket.io");
 
 const MODE = process.env.NODE_ENV;
-const BUILD_DIR = path.join(process.cwd(), "server/build");
+const BUILD_DIR = path.join(process.cwd(), "build");
 
 if (!fs.existsSync(BUILD_DIR)) {
   console.warn(
@@ -21,44 +20,6 @@ const app = express();
 
 // You need to create the HTTP server from the Express app
 const httpServer = createServer(app);
-
-// And then attach the socket.io server to the HTTP server
-const io = new Server(httpServer, { cors: { origin: "*" } });
-// Then you can use `io` to listen the `connection` event and get a socket
-// from a client
-const onlineUsers = new Map();
-
-function deleteUser(socket_id) {
-  for (const [username, id] of onlineUsers.entries()) {
-    if (id === socket_id) {
-      onlineUsers.delete(username);
-      // Notify all clients that the user is now offline
-      io.emit("user_offline", Array.from(onlineUsers.keys()));
-      break;
-    }
-  }
-}
-function notifyOnlineUsers() {
-  io.emit("user_online", Array.from(onlineUsers.keys()));
-}
-
-io.on("connection", (socket) => {
-  socket.on("get_online_users", () => {
-    notifyOnlineUsers();
-  });
-  socket.on("user_login", (session) => {
-    onlineUsers.set(session, socket.id);
-    // Notify all clients that the user is now online
-    notifyOnlineUsers();
-  });
-  // from this point you are on the WS connection with a specific client
-  socket.on("user_logout", (socket_id) => {
-    deleteUser(socket_id);
-  });
-  socket.on("disconnect", () => {
-    deleteUser(socket.id);
-  });
-});
 
 app.use(compression());
 
