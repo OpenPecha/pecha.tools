@@ -17,6 +17,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Socket } from "socket.io-client";
 import NProgress from "nprogress";
 import nProgressStyles from "nprogress/nprogress.css";
+import { Toaster } from "./shadComponent/ui/toaster";
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
@@ -24,6 +25,11 @@ export const links: LinksFunction = () => [
   },
   { rel: "stylesheet", href: tailwindStyle },
   { rel: "stylesheet", href: nProgressStyles },
+  {
+    rel: "icon",
+    type: "image/x-icon",
+    href: "/favicon/favicon.png",
+  },
 ];
 
 export function ErrorBoundary({ error }) {
@@ -86,6 +92,7 @@ export default function App() {
         <SocketProvider socket={socket}>
           <RecoilRoot>
             <Outlet />
+            <Toaster />
           </RecoilRoot>
         </SocketProvider>
         <ScrollRestoration />

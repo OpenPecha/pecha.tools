@@ -29,10 +29,15 @@ export default function Header() {
                   <NavLink
                     to="/"
                     className={({ isActive, isPending }) =>
-                      "h-8 w-auto text-gray-300"
+                      "h-8 w-auto text-gray-300 flex gap-2 items-center"
                     }
                   >
-                    <h2 className="text-2xl font-bold leading-7 dark:text-white text-black sm:truncate sm:text-3xl sm:tracking-tight">
+                    <img
+                      src="/favicon/favicon.png"
+                      className="h-full object-contain"
+                      alt="logo"
+                    />
+                    <h2 className="text-2xl font-bold leading-7 dark:text-white text-slate-600 sm:truncate sm:text-3xl sm:tracking-tight">
                       Pecha Tools
                     </h2>
                   </NavLink>

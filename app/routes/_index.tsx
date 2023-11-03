@@ -6,12 +6,11 @@ import {
 } from "@remix-run/node";
 import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
 import { Suspense, useEffect } from "react";
-import Dashboard from "~/component/Dashboard";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
 import { useSocket } from "~/component/context/socket";
-import { useOnlineUsersDetail } from "~/component/hook/useOnlineUsersDetail";
 import { getUserSession } from "~/services/session.server";
+import { Button } from "~/shadComponent/ui/button";
 import { getCombineTools } from "~/utils/combineTools";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -39,7 +38,6 @@ export default function Index() {
   let data = useLoaderData();
   let user = data?.user;
   let socket = useSocket();
-  let onlineUsers = useOnlineUsersDetail();
   useEffect(() => {
     if (!socket) return;
     if (user) {
@@ -54,10 +52,19 @@ export default function Index() {
       <Header />
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-10">
         <div className="flex justify-between mt-2">
-          <h1 className="text-xl font-bold ">Tools </h1>
+          <h1
+            className="text-2xl ml-4 font-semibold "
+            style={{
+              fontFamily: '"Rubik","Open Sans",sans-serif',
+            }}
+          >
+            Tools{" "}
+          </h1>
           <div className="flex">
-            <Link to="/dashboard" className="btn btn-sm">
-              <h2 className="sm:truncate   sm:tracking-tight">Dashboard</h2>
+            <Link to="/dashboard" className="btn btn-sm mr-6">
+              <Button className="sm:truncate bg-white text-slate-500 hover:bg-white hover:text-slate-600  sm:tracking-tight">
+                Dashboard
+              </Button>
             </Link>
           </div>
         </div>
