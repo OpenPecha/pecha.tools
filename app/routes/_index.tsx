@@ -53,7 +53,7 @@ export default function Index() {
           </div>
         </div>
 
-        <Main tools={data.tools} />
+        <Main tools={data?.tools} />
       </div>
     </div>
   );

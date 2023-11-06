@@ -50,13 +50,14 @@ function Tool({ list, index }) {
     if (list.url) {
       if (user) navigate("/tool/" + list.name.replace(" ", "_"));
     }
-    if (!list.url) {
+    if (!list.url && user) {
       toast.toast({
         title: "No-access",
         description: "you are not assigned to this tool",
       });
     }
   };
+
   return (
     <>
       <Card

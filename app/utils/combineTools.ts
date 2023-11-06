@@ -8,6 +8,7 @@ export async function getCombineTools(email: string) {
 
   try {
     const updatedTool = await fetchToolInfo(email);
+
     let newToolList = toolList.map((tool) => {
       if (tool.department?.includes(updatedTool.department)) {
         tool.url = updatedTool.url;
