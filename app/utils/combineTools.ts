@@ -1,8 +1,13 @@
 import { fetchToolInfo } from "~/api/getUserToolInfo";
 import { toolList } from "~/constant";
 
+function validateEmail(email: string) {
+  var re = /\S+@\S+\.\S+/;
+  return re?.test(email);
+}
+
 export async function getCombineTools(email: string) {
-  if (!email || !email.includes("@") || email === "") {
+  if (!email ?? !validateEmail(email)) {
     return toolList;
   }
 
