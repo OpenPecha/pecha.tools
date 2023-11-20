@@ -12,10 +12,10 @@
 .header {
   height: var(--header-height);
 }
-.iframe-container {
+/* .iframe-container {
   overflow: hidden;
   height: calc(100vh - var(--header-height));
-}
+} */
 .container {
   display: flex;
   justify-content: space-between;
