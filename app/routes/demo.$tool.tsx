@@ -1,8 +1,8 @@
 import { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
-import Header from "~/component/Header";
-import { toolList } from "~/constant";
+import FloatingMenu from "~/component/FloatingMenu";
+import { HEADERHEIGHT, toolList } from "~/constant";
 import { getUserSession } from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -31,7 +31,7 @@ export const meta: MetaFunction = ({ params }) => {
   ];
 };
 function Tool() {
-  const { url } = useLoaderData();
+  const { url, user } = useLoaderData();
   const [loaded, setLoaded] = useState(false);
   const iframeRef = useRef(null);
   function onLoadFunction() {
@@ -42,10 +42,10 @@ function Tool() {
   }
   return (
     <>
-      <Header />
-      <div className="iframe-container">
+      <div className="relative overflow-hidden h-[100dvh]">
         {!loaded && <Loading />}
         <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
+        {user && <FloatingMenu />}
       </div>
     </>
   );

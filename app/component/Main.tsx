@@ -59,10 +59,10 @@ function Tool({ list, index }) {
   };
 
   return (
-    <>
-      <Card
+    <div className="rounded-xl relative border border-slate-200 text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 tool  z-0 cursor-pointer text-center w-full  overflow-hidden hover:scale-95 transition-all duration-500">
+      <div
         onClick={handleClick}
-        className={`tool ${getColor} cursor-pointer text-center w-full relative overflow-hidden hover:scale-95 transition-all duration-500 `}
+        className={`tool ${getColor} z-0 cursor-pointer text-center w-full overflow-hidden hover:scale-95 transition-all duration-500 `}
       >
         <CardHeader>
           <img
@@ -76,16 +76,16 @@ function Tool({ list, index }) {
             {list.name.replaceAll("_", " ")}
           </div>
         </CardContent>
-        {list.demo && (
-          <Link
-            to={"/demo/" + list.name}
-            className="link absolute -bottom-5 right-0  uppercase text-sm text-gray-400 dark:bg-slate-600  dark:text-gray-200  font-light hover:text-black bg-gray-100  px-2 "
-          >
-            demo
-          </Link>
-        )}
-      </Card>
-    </>
+      </div>
+      {list.demo && (
+        <Link
+          to={"/demo/" + list.name}
+          className="link absolute z-10 -bottom-5 right-0  uppercase text-sm text-gray-400 dark:bg-slate-600  dark:text-gray-200  font-light hover:text-black bg-gray-100  px-2 "
+        >
+          demo
+        </Link>
+      )}
+    </div>
   );
 }
 
