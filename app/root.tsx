@@ -16,6 +16,8 @@ import { useState, useEffect, useMemo } from "react";
 import NProgress from "nprogress";
 import nProgressStyles from "nprogress/nprogress.css";
 import { Toaster } from "./shadComponent/ui/toaster";
+import FeedBucket from "./component/Feedbucket";
+import { getUserSession } from "./services/session.server";
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
@@ -48,6 +50,13 @@ export function ErrorBoundary({ error }) {
   );
 }
 
+export async function loader({ request }) {
+  let user = await getUserSession(request);
+  let feedbucketAccess = process.env.FEEDBUCKET_ACCESS;
+
+  return { user, feedbucketAccess };
+}
+
 export default function App() {
   let transition = useNavigation();
   let fetchers = useFetchers();
@@ -65,10 +74,7 @@ export default function App() {
   );
 
   useEffect(() => {
-    // and when it's something else it means it's either submitting a form or
-    // waiting for the loaders of the next location so we start it
     if (state === "loading") NProgress.start();
-    // when the state is idle then we can to complete the progress bar
     if (state === "idle") NProgress.done();
   }, [transition.state]);
   return (
@@ -81,6 +87,7 @@ export default function App() {
       </head>
       <body>
         <RecoilRoot>
+          <FeedBucket />
           <Outlet />
           <Toaster />
         </RecoilRoot>

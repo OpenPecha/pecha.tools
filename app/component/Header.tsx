@@ -13,7 +13,6 @@ function classNames(...classes) {
 
 export default function Header() {
   const { user } = useLoaderData();
-
   const isAdmin = user?.role === "admin";
   return (
     <Disclosure
