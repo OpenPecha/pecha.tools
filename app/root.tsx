@@ -52,9 +52,8 @@ export function ErrorBoundary({ error }) {
 
 export async function loader({ request }) {
   let user = await getUserSession(request);
-  let feedbucketAccess = process.env.FEEDBUCKET_ACCESS;
 
-  return { user, feedbucketAccess };
+  return { user };
 }
 
 export default function App() {

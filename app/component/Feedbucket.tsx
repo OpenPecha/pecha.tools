@@ -4,30 +4,35 @@ import { MdFeedback } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
 function FeedBucket() {
-  let { user, feedbucketAccess } = useRouteLoaderData("root");
+  let { user } = useRouteLoaderData("root");
   let [show, setShow] = useState(false);
   let email = user?.email;
   let name = user?.name;
   let feedFunction = () => {
-    setShow(true);
     const feedbucket = document.querySelector("feedbucket-app");
     feedbucket?.classList.remove("hidden");
 
-    (function (k, s) {
-      s = document.createElement("script");
-      s.module = true;
-      s.defer = true;
-      s.src = "https://cdn.feedbucket.app/assets/feedbucket.js";
-      s.dataset.feedbucket = k;
-      document.head.appendChild(s);
-    })("fvsQpmglx4sVSPLhRGfA");
+    if (user) {
+      setShow(true);
 
-    window.feedbucketConfig = {
-      reporter: {
-        name,
-        email,
-      },
-    };
+      (function (k, s) {
+        s = document.createElement("script");
+        s.module = true;
+        s.defer = true;
+        s.src = "https://cdn.feedbucket.app/assets/feedbucket.js";
+        s.dataset.feedbucket = k;
+        document.head.appendChild(s);
+      })("fvsQpmglx4sVSPLhRGfA");
+
+      window.feedbucketConfig = {
+        reporter: {
+          name,
+          email,
+        },
+      };
+    } else {
+      alert("login first");
+    }
   };
   let hideFeedBucket = () => {
     setShow(false);
