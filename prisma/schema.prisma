@@ -11,16 +11,27 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  username  String?
-  picture String?
-  role role? @default(annotator)
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  username String?
+  picture  String?
+  role     role?   @default(annotator)
 }
 
-enum role{
- admin
- leader
- annotator
- reviewer
+model Tools {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  url         String?
+  demo        String?
+  icon        String?
+  department  String[]
+  active      Boolean?
+}
+
+enum role {
+  admin
+  leader
+  annotator
+  reviewer
 }

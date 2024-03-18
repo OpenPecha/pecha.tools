@@ -2,13 +2,14 @@ import { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useRef, useState } from "react";
 import FloatingMenu from "~/component/FloatingMenu";
-import { HEADERHEIGHT, toolList } from "~/constant";
+import { getTools } from "~/modal/tool";
 import { getUserSession } from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   let toolname = params.tool;
   let user = await getUserSession(request);
   let { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV } = process.env;
+  const toolList=await getTools();
   if (toolList.find((d) => d.name === toolname)) {
     let filtered = toolList.find((tool) => tool.name === toolname);
     let url = filtered?.demo;

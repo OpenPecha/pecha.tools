@@ -1,6 +1,5 @@
-import { defer, MetaFunction, type LoaderFunction } from "@remix-run/node";
-import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
-import { Suspense, useEffect } from "react";
+import { MetaFunction, type LoaderFunction, json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
 import { getUserSession } from "~/services/session.server";
@@ -11,7 +10,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
   let toolList = await getCombineTools(user?.email);
   let { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV } = process.env;
-  return defer({
+  return json({
     user,
     tools: toolList,
     env: { AUTH0_DOMAIN, AUTH0_CLIENT_ID, NODE_ENV },

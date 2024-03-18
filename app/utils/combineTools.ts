@@ -1,5 +1,5 @@
 import { fetchToolInfo } from "~/api/getUserToolInfo";
-import { toolList } from "~/constant";
+import { getTools } from "~/modal/tool";
 
 function validateEmail(email: string) {
   var re = /\S+@\S+\.\S+/;
@@ -7,6 +7,7 @@ function validateEmail(email: string) {
 }
 
 export async function getCombineTools(email: string) {
+  const toolList=await getTools();
   if (!email ?? !validateEmail(email)) {
     return toolList;
   }

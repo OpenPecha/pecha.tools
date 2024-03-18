@@ -24,7 +24,7 @@ function Main({ tools }) {
 function Tool({ list, index }) {
   let { user } = useLoaderData();
   let navigate = useNavigate();
-  let getColor = getRandomLightColor(index);
+  let getColor = list.active===true?getRandomLightColor(index):getRandomLightColor(index)+' opacity-60 pointer-events-none';
   let toast = useToast();
   function login() {
     let loginBtn = document.getElementById("login-btn");
@@ -66,7 +66,7 @@ function Tool({ list, index }) {
       >
         <CardHeader>
           <img
-            src={list?.ICON}
+            src={list?.icon}
             alt="card-icon"
             className="w-20 h-20 mx-auto object-contain"
           />
