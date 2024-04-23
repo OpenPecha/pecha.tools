@@ -53,7 +53,8 @@ export function ErrorBoundary({ error }) {
 export async function loader({ request }) {
   let user = await getUserSession(request);
   let feedbucketToken = process.env?.FEEDBUCKET_TOKEN;
-  return { user, feedbucketToken };
+  let feedBucketAccess = process.env?.FEEDBUCKET_ACCESS;
+  return { user, feedbucketToken, feedBucketAccess };
 }
 
 export default function App() {
