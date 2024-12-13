@@ -5,7 +5,7 @@ import { useToast } from "~/shadComponent/ui/use-toast";
 import getRandomLightColor from "~/utils/getRandomColor";
 function Main({ tools }) {
   return (
-    <main>
+    <main className="flex-1">
       <section>
         <div className="mx-auto grid lg:grid-cols-4 md:grid-cols-3 gap-5 px-[20px] ">
           {tools.map((list, index) => {
@@ -57,22 +57,22 @@ function Tool({ list, index }) {
       });
     }
   };
-
   return (
-    <div className="rounded-xl relative border border-slate-200 text-slate-950 shadow dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 tool  z-0 cursor-pointer text-center w-full  overflow-hidden hover:scale-95 transition-all duration-500">
+    <div className="rounded-md relative shadow-md bg-[#2d3354] hover:bg-[#2a2c48] tool  z-0 cursor-pointer text-center w-full  overflow-hidden  transition-all duration-500">
       <div
         onClick={handleClick}
-        className={`tool ${getColor} z-0 cursor-pointer text-center w-full overflow-hidden hover:scale-95 transition-all duration-500 `}
+        className={`tool z-0 cursor-pointer text-center w-full overflow-hidden  transition-all duration-500 `}
       >
         <CardHeader>
           <img
             src={list?.icon}
             alt="card-icon"
-            className="w-20 h-20 mx-auto object-contain"
+            className={` h-24 mx-auto object-contain ${getColor} `}
           />
         </CardHeader>
+        <hr className={`${getColor} border-none h-[1px]`}/>
         <CardContent>
-          <div className=" uppercase text-center text-slate-700 font-semibold">
+          <div className=" uppercase text-center text-[#e9eaeb] font-semibold">
             {list.name.replaceAll("_", " ")}
           </div>
         </CardContent>

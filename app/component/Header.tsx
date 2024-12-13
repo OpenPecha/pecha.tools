@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <Disclosure
       as="nav"
-      className="bg-white dark:bg-gray-900  w-full z-20  border-b border-gray-200 dark:border-gray-600  header"
+      className="bg-[#1f2228]  w-full z-20  shadow-md  header"
     >
       {({ open }) => (
         <>
@@ -36,7 +36,7 @@ export default function Header() {
                       className="h-full object-contain"
                       alt="logo"
                     />
-                    <h2 className="text-2xl font-bold leading-7 dark:text-white text-slate-600 sm:truncate sm:text-3xl sm:tracking-tight">
+                    <h2 className="text-2xl font-bold leading- text-[#e9eaeb] sm:truncate sm:text-3xl sm:tracking-tight">
                       Pecha Tools
                     </h2>
                   </NavLink>

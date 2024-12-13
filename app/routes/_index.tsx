@@ -31,9 +31,9 @@ export default function Index() {
   let data = useLoaderData();
 
   return (
-    <div>
+    <div className="bg-[#1f2228] min-h-screen flex flex-col text-[#e9eaeb]">
       <Header />
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-10">
+      <div className="mx-auto max-w-7xl  flex-1  sm:px-6 lg:px-8 mt-10">
         <div className="flex justify-between mt-2">
           <h1
             className="text-2xl ml-4 font-semibold "
@@ -43,15 +43,8 @@ export default function Index() {
           >
             Tools{" "}
           </h1>
-          <div className="flex">
-            <Link to="/dashboard" className="btn btn-sm mr-6">
-              <Button className="sm:truncate bg-white text-slate-500 hover:bg-white hover:text-slate-600  sm:tracking-tight">
-                Dashboard
-              </Button>
-            </Link>
-          </div>
+         
         </div>
-
         <Main tools={data?.tools} />
       </div>
     </div>

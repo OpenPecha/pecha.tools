@@ -43,8 +43,8 @@ function FeedBucket() {
   let monlam_user = email?.includes("@monlam.ai");
   if (
     monlam_user ||
-    esukhia_user ||
-    JSON.parse(feedBucketAccess).includes(user?.email)
+    esukhia_user 
+    // JSON.parse(feedBucketAccess).includes(user?.email)
   ) {
     return (
       <div
