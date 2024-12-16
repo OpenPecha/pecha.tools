@@ -55,7 +55,7 @@ function Tool() {
     <>
       <div className="relative  overflow-hidden h-[100dvh]">
         {!loaded && <Loading />}
-        <iframe src={url} onLoad={onLoadFunction} ref={iframeRef}></iframe>
+        <iframe src={url} onLoad={onLoadFunction} ref={iframeRef} allow="microphone; camera; midi; clipboard-read; clipboard-write" ></iframe>
         <FloatingMenu />
       </div>
     </>
