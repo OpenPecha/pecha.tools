@@ -2,5 +2,5 @@
 module.exports = {
   serverModuleFormat: "cjs",
   ignoredRouteFiles: ["**/.*"],
-  tailwind: true,
+  tailwind: true  
 };

@@ -2,10 +2,11 @@ import { MetaFunction, type LoaderFunction, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
+import SplineUI from "~/component/spline";
 import { getUserSession } from "~/services/session.server";
 import { Button } from "~/shadComponent/ui/button";
 import { getCombineTools } from "~/utils/combineTools";
-
+import { ClientOnly } from "remix-utils/client-only"
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
   let toolList = await getCombineTools(user?.email);
@@ -33,20 +34,21 @@ export default function Index() {
   return (
     <div className="bg-[#1f2228] min-h-screen flex flex-col text-[#e9eaeb]">
       <Header />
-      <div className="mx-auto max-w-7xl  flex-1  sm:px-6 lg:px-8 mt-10">
+
+      <div className=" mx-auto w-full md:max-w-7xl  flex-1  sm:px-6 lg:px-8 mt-10">
         <div className="flex justify-between mt-2">
           <h1
             className="text-2xl ml-4 font-semibold "
             style={{
               fontFamily: '"Rubik","Open Sans",sans-serif',
             }}
-          >
+            >
             Tools{" "}
           </h1>
          
         </div>
         <Main tools={data?.tools} />
-      </div>
+            </div>
     </div>
   );
 }
