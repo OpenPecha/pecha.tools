@@ -24,7 +24,6 @@ function Main({ tools }) {
 function Tool({ list, index }) {
   let { user } = useLoaderData();
   let navigate = useNavigate();
-  let getColor = list.active===true?getRandomLightColor(index):getRandomLightColor(index)+' opacity-60 pointer-events-none';
   let toast = useToast();
   function login() {
     let loginBtn = document.getElementById("login-btn");
@@ -44,7 +43,7 @@ function Tool({ list, index }) {
     }
     return;
   }
-
+  
   let handleClick = () => {
     checkAuth();
     if (list.url) {
@@ -57,6 +56,10 @@ function Tool({ list, index }) {
       });
     }
   };
+  let getColor = getRandomLightColor(index);
+
+  if(!list.active) return null;
+
   return (
     <div className="rounded-md relative shadow-md bg-[#2d3354] hover:bg-[#2a2c48] tool  z-0 cursor-pointer text-center w-full  overflow-hidden  transition-all duration-500">
       <div

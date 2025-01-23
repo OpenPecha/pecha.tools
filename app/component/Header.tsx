@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <Disclosure
       as="nav"
-      className="bg-[#1f2228]  w-full z-20  shadow-md  header"
+      className="bg-[#1f2228]  w-full z-20  header"
     >
       {({ open }) => (
         <>
