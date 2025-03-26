@@ -2,9 +2,7 @@ import { MetaFunction, type LoaderFunction, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import Header from "~/component/Header";
 import Main from "~/component/Main";
-import SplineUI from "~/component/spline";
 import { getUserSession } from "~/services/session.server";
-import { Button } from "~/shadComponent/ui/button";
 import { getCombineTools } from "~/utils/combineTools";
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await getUserSession(request);
