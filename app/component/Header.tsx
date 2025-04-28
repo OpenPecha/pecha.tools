@@ -1,9 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink, useLoaderData } from "@remix-run/react";
 import Login from "./Login";
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,18 +12,18 @@ export default function Header() {
   return (
     <Disclosure
       as="nav"
-      className="bg-[#1f2228]  w-full z-20  header"
+      className="bg-[#1f2228] border-b border-gray-700 w-full z-20 shadow-md header"
     >
       {({ open }) => (
         <>
-          <div className="mx-auto  px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center gap-2 sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0">
+                <div className="flex flex-shrink-0 items-center">
                   <NavLink
                     to="/"
                     className={({ isActive, isPending }) =>
-                      "h-8 w-auto text-gray-300 flex gap-2 items-center"
+                      "h-10 w-auto text-gray-300 flex gap-3 items-center transition-all duration-200 hover:text-white"
                     }
                   >
                     <img
@@ -33,18 +31,17 @@ export default function Header() {
                       className="h-full object-contain"
                       alt="logo"
                     />
-                    <h2 className="text-2xl font-bold leading- text-[#e9eaeb] sm:truncate sm:text-3xl sm:tracking-tight">
+                    <h2 className="text-xl font-bold text-[#e9eaeb] sm:truncate sm:text-2xl sm:tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                       Pecha Tools
                     </h2>
                   </NavLink>
                 </div>
-
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {user ? (
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 border-2 border-gray-700 hover:border-blue-400 transition-all duration-200">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         <img
@@ -64,7 +61,7 @@ export default function Header() {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-2 shadow-lg ring-1 ring-gray-700 border border-gray-700 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
                             <div
@@ -76,14 +73,14 @@ export default function Header() {
                             </div>
                           )}
                         </Menu.Item>
-                   
+
                         <Menu.Item>
                           {({ active }) => (
                             <Link
                               to={"/logout"}
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-gray-700" : "",
+                                "block px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors duration-200"
                               )}
                             >
                               Sign out
