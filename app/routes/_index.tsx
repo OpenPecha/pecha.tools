@@ -117,7 +117,7 @@ export default function Index() {
             </div>
             <div className="flex-shrink-0 flex items-center space-x-2">
               <a
-                href="https://workspace.pecha.tools"
+                href="https://studio.pecha.ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 border border-white/20 text-sm font-medium rounded-md text-white bg-white/10 hover:bg-white/20 transition-all duration-200 backdrop-blur-sm"
