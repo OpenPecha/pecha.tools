@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   useFetchers,
+  useLoaderData,
   useNavigation,
 } from "@remix-run/react";
 import { RecoilRoot } from "recoil";
@@ -17,6 +18,8 @@ import NProgress from "nprogress";
 import nProgressStyles from "nprogress/nprogress.css";
 import { Toaster } from "./shadComponent/ui/toaster";
 import FeedBucket from "./component/Feedbucket";
+
+import { PostHogProvider } from 'posthog-js/react'
 import { getUserSession } from "./services/session.server";
 export const links: LinksFunction = () => [
   {
@@ -54,13 +57,15 @@ export async function loader({ request }) {
   let user = await getUserSession(request);
   let feedbucketToken = process.env?.FEEDBUCKET_TOKEN;
   let feedBucketAccess = process.env?.FEEDBUCKET_ACCESS;
-  return { user, feedbucketToken, feedBucketAccess };
+  let posthogKey = process.env?.PUBLIC_POSTHOG_KEY;
+  let posthogHost = process.env?.PUBLIC_POSTHOG_HOST;
+  return { user, feedbucketToken, feedBucketAccess ,posthogKey, posthogHost};
 }
 
 export default function App() {
   let transition = useNavigation();
   let fetchers = useFetchers();
-
+  const { posthogKey, posthogHost } = useLoaderData();
   let state = useMemo<"idle" | "loading">(
     function getGlobalState() {
       let states = [
@@ -72,7 +77,10 @@ export default function App() {
     },
     [transition.state, fetchers]
   );
-
+  const options = {
+    api_host: posthogHost,
+    defaults: '2025-05-24',
+  }
   useEffect(() => {
     if (state === "loading") NProgress.start();
     if (state === "idle") NProgress.done();
@@ -87,8 +95,11 @@ export default function App() {
       </head>
       <body>
         <RecoilRoot>
+          
           <FeedBucket />
+    <PostHogProvider apiKey={posthogKey} options={options}>
           <Outlet />
+    </PostHogProvider>
           <Toaster />
         </RecoilRoot>
         <ScrollRestoration />
